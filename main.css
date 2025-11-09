@@ -1,63 +1,38 @@
-/* --- Estilos del Fondo (La Imagen Estática) --- */
+/* --- El Body Completo como la IMAGEN DE FONDO LATIENDO --- */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    overflow: hidden;
+    overflow: hidden; /* Importante para que el escalado no muestre barras */
 
-    /* AHORA USAMOS LA IMAGEN COMO FONDO DE PÁGINA */
+    /* Tu imagen de corazón difuminado como fondo */
     background-image: url('background-heart.png'); 
-    background-size: cover; /* Cubre toda la pantalla */
+    background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
     background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat;
-}
-
-/* --- El Corazón Creado con CSS (El ÚNICO que Late) --- */
-.gradient-heart {
-    position: relative;
-    width: 200px;
-    height: 180px;
-
-    /* GRADIENTE: Similar al color de la imagen para el corazón latiendo */
-    background: radial-gradient(circle at center, 
-                #ff80ab 0%, 
-                #ff1493 40%,
-                #e0007b 80%
-                );
-
-    /* Forma del Corazón con clip-path: Recrea la forma suave */
-    clip-path: path("M200 70 C 200 20, 150 0, 100 50 C 50 0, 0 20, 0 70 C 0 120, 100 180, 100 180 C 100 180, 200 120, 200 70 Z");
-
-    /* FILTRO BLUR (Desenfoque) para que parezca difuminado */
-    filter: blur(20px); 
-
-    /* Box-shadow: el halo de luz */
-    box-shadow: 0 0 100px 30px rgba(255, 0, 127, 0.8); 
-
-    /* Aplica la animación de latido SOLO a este elemento */
-    animation: pulse-css 3s infinite ease-in-out; 
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
     
-    transform-origin: center center;
-    z-index: 10;
+    /* El body completo es el que se anima para LATIR */
+    animation: background-pulse 3s infinite ease-in-out; 
+    
+    /* Importante para que la animación de escala se vea bien */
+    transform-origin: center center; 
 }
 
-/* --- Definición de la Animación de Latido (Visible y Suave) --- */
-@keyframes pulse-css {
+/* --- Definición de la Animación de Latido (para el Fondo/Imagen) --- */
+@keyframes background-pulse {
     0% {
-        transform: scale(1); /* Tamaño normal */
-        filter: blur(15px); /* Un poco menos de desenfoque */
-        box-shadow: 0 0 80px 20px rgba(255, 0, 127, 0.7); /* Menos brillo */
+        transform: scale(1); /* Tamaño normal del fondo */
+        /* Opcional: puedes ajustar la opacidad si quieres un efecto de brillo */
+        opacity: 0.95; 
     }
     50% {
-        transform: scale(1.15); /* Crece un 15% más: Latido muy visible */
-        filter: blur(25px); /* Más desenfoque y brillo al latir */
-        box-shadow: 0 0 120px 40px rgba(255, 0, 127, 1); /* Brillo máximo */
+        transform: scale(1.05); /* El fondo crece un 5% (latido visible pero suave) */
+        opacity: 1; /* Opacidad completa en el punto álgido del latido */
     }
     100% {
         transform: scale(1); /* Vuelve al tamaño normal */
-        filter: blur(15px);
-        box-shadow: 0 0 80px 20px rgba(255, 0, 127, 0.7);
+        opacity: 0.95;
     }
 }
