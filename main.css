@@ -6,38 +6,56 @@ body {
     min-height: 100vh;
     margin: 0;
     
-    /* Color de fondo que coincide con la imagen original para un look sin bordes */
+    /* El color de fondo rosa suave de tu imagen */
     background-color: #f7e0e7; 
     overflow: hidden;
 }
 
-/* --- El Corazón Usando la Imagen ORIGINAL --- */
-.original-heart-image {
-    width: 350px; /* Tamaño del contenedor, puedes ajustarlo si quieres un corazón más grande */
-    height: 350px;
+/* --- El Corazón Creado con CSS (Replicando el de tu Imagen) --- */
+.gradient-heart {
+    position: relative;
+    width: 200px; /* Tamaño base del corazón */
+    height: 180px; /* Altura ajustada para la forma de tu imagen */
     
-    /* Llama a la imagen difuminada que subiste */
-    background-image: url('heart-diffused.png'); 
-    background-size: contain; /* Asegura que la imagen se vea completa */
-    background-repeat: no-repeat;
-    background-position: center; 
+    /* GRADIENTE RADIAL: Clave para el efecto de luz central y difuminado de tu imagen */
+    background: radial-gradient(circle at center, 
+                #ff80ab 0%,    /* Rosa claro en el centro */
+                #ff1493 40%,   /* Rosa vibrante intermedio */
+                #e0007b 80%    /* Rosa oscuro en los bordes para profundidad */
+                );
     
-    /* Aplica la animación de latido */
-    animation: pulse-image 2.5s infinite ease-in-out; /* Velocidad y suavidad de la animación */
+    /* Forma del Corazón con clip-path: Recrea la forma suave de tu imagen */
+    clip-path: path("M200 70 C 200 20, 150 0, 100 50 C 50 0, 0 20, 0 70 C 0 120, 100 180, 100 180 C 100 180, 200 120, 200 70 Z");
     
-    /* Aseguramos que la transformación se haga desde el centro */
-    transform-origin: center center; 
+    /* FILTRO BLUR (Desenfoque): Esto es esencial para el efecto "desenfocado" de tu imagen */
+    filter: blur(25px); /* Ajustado para replicar el difuminado de tu imagen */
+    
+    /* Box-shadow difuminado: Crea el halo de luz alrededor del corazón, como en tu imagen */
+    box-shadow: 0 0 100px 30px rgba(255, 0, 127, 0.8); 
+    
+    /* Aplica la animación de latido a este corazón de CSS */
+    animation: pulse-css 3s infinite ease-in-out; 
+    
+    /* Ajuste de transformación para el latido */
+    transform-origin: center center;
+    z-index: 10;
 }
 
-/* --- Definición de la Animación de Latido (Visible) --- */
-@keyframes pulse-image {
+/* --- Definición de la Animación de Latido (Visible y Suave) --- */
+@keyframes pulse-css {
     0% {
-        transform: scale(1); /* Tamaño base */
+        transform: scale(1); /* Tamaño normal */
+        filter: blur(20px); /* Un poco menos de desenfoque cuando está "descansando" */
+        box-shadow: 0 0 80px 20px rgba(255, 0, 127, 0.7); /* Menos brillo */
     }
     50% {
-        transform: scale(1.15); /* Crece un 15% más grande: esto hará que el latido sea MUY visible */
+        transform: scale(1.1); /* Crece un 10% más grande */
+        filter: blur(30px); /* Más desenfoque y brillo al latir */
+        box-shadow: 0 0 120px 40px rgba(255, 0, 127, 1); /* Brillo máximo */
     }
     100% {
-        transform: scale(1); /* Vuelve al tamaño base */
+        transform: scale(1); /* Vuelve al tamaño normal */
+        filter: blur(20px);
+        box-shadow: 0 0 80px 20px rgba(255, 0, 127, 0.7);
     }
 }
