@@ -6,55 +6,84 @@ body {
     min-height: 100vh;
     margin: 0;
     
-    /* Fondo rosa pálido que se mezclará bien con el corazón difuminado */
+    /* El mismo color de fondo rosa pálido que en tu imagen */
     background-color: #f7e0e7; 
     overflow: hidden;
 }
 
-/* --- El Corazón Gradiente, SUPER Difuminado --- */
-.super-diffused-heart {
+/* --- El Corazón Tipo Emoji (con Difuminado Sutil) --- */
+.emoji-heart {
     position: relative;
-    width: 250px; /* Tamaño base del corazón (más grande para difuminar mejor) */
-    height: 220px; /* Altura ajustada para una forma suave */
+    width: 180px; /* Tamaño del corazón */
+    height: 180px;
     
-    /* GRADIENTE RADIAL: Desde el centro hacia afuera, como en tu imagen */
-    background: radial-gradient(circle at center, 
-                #ff80ab 0%,    /* Rosa claro en el centro */
-                #ff1493 40%,   /* Rosa vibrante intermedio */
-                #e0007b 80%    /* Rosa oscuro en los bordes */
+    /* GRADIENTE: Para el efecto "emoji" con luz/sombra sutil */
+    background: radial-gradient(circle at 30% 30%, 
+                #ff508c 0%,    /* Un punto de luz más claro */
+                #ff007f 60%,   /* El color base del emoji */
+                #cc0066 100%   /* Un poco más oscuro en los bordes */
                 );
     
-    /* Clip-path para una forma base de corazón suave */
-    clip-path: path("M250 85 C 250 25, 187.5 0, 125 62.5 C 62.5 0, 0 25, 0 85 C 0 150, 125 220, 125 220 C 125 220, 250 150, 250 85 Z");
+    /* Gira el elemento para formar la punta del corazón */
+    transform: rotate(-45deg); 
     
-    /* FILTRO BLUR (Desenfoque EXTREMO): Esto es la clave para la super difuminación */
-    filter: blur(50px); /* ¡Ajustado a un valor muy alto para una difuminación máxima! */
+    /* Sombra sutil para darle profundidad, como un emoji */
+    box-shadow: 8px 8px 25px rgba(0, 0, 0, 0.2); 
     
-    /* Box-shadow ENORME y difuminado: Crea un halo de luz aún mayor */
-    box-shadow: 0 0 200px 80px rgba(255, 0, 127, 0.6); 
+    /* FILTRO BLUR (Desenfoque SUAVE): Esto es clave para el "un poco más difuminado" */
+    filter: blur(1.5px); /* Un valor bajo para una suavidad muy sutil */
     
-    /* Aplica la animación de latido a este corazón CSS */
-    animation: pulse-super-diffused 3.5s infinite ease-in-out; 
+    /* Aplica la animación de latido */
+    animation: emoji-pulse 2.5s infinite ease-in-out; 
     
     transform-origin: center center;
     z-index: 10;
 }
 
-/* --- Definición de la Animación de Latido (Visible en el Corazón Difuminado) --- */
-@keyframes pulse-super-diffused {
+/* Pseudo-elementos para las dos partes redondeadas superiores del corazón */
+.emoji-heart::before,
+.emoji-heart::after {
+    content: "";
+    position: absolute;
+    width: 180px; 
+    height: 180px;
+    
+    /* Mismo gradiente para que las partes superiores coincidan */
+    background: radial-gradient(circle at 30% 30%, 
+                #ff508c 0%,    
+                #ff007f 60%,   
+                #cc0066 100%   
+                );
+    border-radius: 50%; /* Los convierte en círculos */
+}
+
+/* Posiciona el círculo superior izquierdo */
+.emoji-heart::before {
+    top: -90px; 
+    left: 0;
+}
+
+/* Posiciona el círculo superior derecho */
+.emoji-heart::after {
+    top: 0;
+    left: 90px; 
+}
+
+/* --- Definición de la Animación de Latido (Claro y Visible) --- */
+@keyframes emoji-pulse {
     0% {
-        transform: scale(1); /* Tamaño normal */
-        filter: blur(40px); /* Un poco menos de desenfoque al "descansar" */
-        box-shadow: 0 0 180px 70px rgba(255, 0, 127, 0.5); /* Menos brillo */
+        transform: rotate(-45deg) scale(1); /* Tamaño normal */
+        filter: blur(1.5px); /* Desenfoque sutil */
+        box-shadow: 8px 8px 25px rgba(0, 0, 0, 0.2); /* Sombra normal */
     }
     50% {
-        transform: scale(1.1); /* Crece un 10% más grande para un latido visible */
-        filter: blur(60px); /* Más desenfoque y brillo al latir */
-        box-shadow: 0 0 250px 100px rgba(255, 0, 127, 0.8); /* Brillo máximo */
+        transform: rotate(-45deg) scale(1.1); /* Crece un 10% más grande (latido visible) */
+        filter: blur(2.5px); /* Un poco más difuminado en el punto álgido */
+        box-shadow: 12px 12px 35px rgba(0, 0, 0, 0.3); /* Sombra más fuerte */
     }
     100% {
-        transform: scale(1); /* Vuelve al tamaño normal */
-        filter: blur(40px);
-        box-shadow: 0 0 180px 70px rgba(255, 0, 127, 0.5);
+        transform: rotate(-45deg) scale(1); /* Vuelve al tamaño normal */
+        filter: blur(1.5px);
+        box-shadow: 8px 8px 25px rgba(0, 0, 0, 0.2);
     }
 }
