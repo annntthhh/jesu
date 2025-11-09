@@ -1,73 +1,112 @@
-/* Estilos generales para centrar el corazón en la pantalla */
+/* --- Estilos Generales y Centrado --- */
 body {
-    display: flex; /* Usa flexbox para alinear el contenido */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    min-height: 100vh; /* Ocupa el 100% de la altura de la ventana */
-    margin: 0; /* Elimina márgenes por defecto */
-    
-    /* Fondo con el color suave de tu imagen */
-    background-color: #fce4ec; /* Rosa muy pálido */
-    overflow: hidden; /* Evita barras de desplazamiento */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #fce4ec; /* Rosa muy pálido de tu imagen */
+    overflow: hidden;
 }
 
-/* Estilos para el corazón */
-.heart {
-    position: relative; /* Necesario para posicionar ::before y ::after */
-    width: 200px; /* Tamaño base del corazón */
-    height: 200px;
-    
-    /* Color principal del corazón, un rosa vibrante como en tu imagen */
-    background-color: #ff007f; 
-    
-    /* Gira el elemento para formar la punta del corazón */
-    transform: rotate(-45deg); 
-    
-    /* Brillo inicial, similar al desenfoque de tu imagen */
-    box-shadow: 0 0 60px rgba(255, 0, 127, 0.9); 
-    
-    /* Aplica la animación definida más abajo */
-    animation: pulse-grow 4s infinite ease-in-out; 
+/* Contenedor del corazón principal y los corazones que emanan */
+.heart-wrapper {
+    position: relative; /* Esencial para posicionar los emisores dentro */
+    width: 250px; /* Tamaño más grande para el contenedor */
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Pseudo-elementos para las dos partes redondeadas superiores del corazón */
-.heart::before,
-.heart::after {
-    content: ""; /* Obligatorio para pseudo-elementos */
-    position: absolute; /* Permite posicionarlos libremente */
-    width: 200px; /* Mismo tamaño que el .heart */
-    height: 200px;
-    background-color: #ff007f; /* Mismo color */
-    border-radius: 50%; /* Los convierte en círculos */
+/* --- El Corazón Principal Difuminado y con Gradiente --- */
+.heart-diffused {
+    position: absolute;
+    width: 200px;
+    height: 180px; /* Ligeramente más alto para una forma más suave */
+    
+    /* Fondo con gradiente para el efecto difuminado */
+    background: radial-gradient(circle at center, #ff80ab 0%, #ff1493 50%, #e0007b 100%);
+    
+    /* Bordes redondeados para una forma más suave y orgánica */
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0; /* Forma de corazón con border-radius */
+    
+    /* La magia del 'clip-path' para la forma final y difuminada */
+    clip-path: path("M200 70 C 200 20, 150 0, 100 50 C 50 0, 0 20, 0 70 C 0 120, 100 180, 100 180 C 100 180, 200 120, 200 70 Z");
+    
+    /* Sombra difuminada muy grande para el efecto de brillo */
+    box-shadow: 0 0 120px 30px rgba(255, 0, 127, 0.9);
+    
+    /* Animación del latido */
+    animation: pulse-diffused 4s infinite ease-in-out;
 }
 
-/* Posiciona el círculo superior izquierdo */
-.heart::before {
-    top: -100px; /* La mitad de la altura hacia arriba */
-    left: 0;
+/* --- Contenedor para los Corazones que Emanan --- */
+.heart-emitters {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* No hay un fondo visible, solo es un punto de origen */
 }
 
-/* Posiciona el círculo superior derecho */
-.heart::after {
-    top: 0;
-    left: 100px; /* La mitad de la anchura hacia la derecha */
+/* --- Corazones que Emanan (Generación con pseudo-elementos) --- */
+/* Creamos múltiples 'capas' de corazones emisores */
+.heart-emitters::before,
+.heart-emitters::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px; /* Tamaño inicial de los corazones que emanan */
+    height: 20px;
+    background: radial-gradient(circle at center, rgba(255, 128, 171, 0.7) 0%, rgba(255, 20, 147, 0.5) 100%);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    clip-path: path("M20 7 C 20 2, 15 0, 10 5 C 5 0, 0 2, 0 7 C 0 12, 10 18, 10 18 C 10 18, 20 12, 20 7 Z");
+    opacity: 0; /* Inicialmente invisibles */
+    pointer-events: none; /* Para que no interfieran con clics */
 }
 
-/* Definición de la animación de latido y crecimiento lento */
-@keyframes pulse-grow {
+/* Animación para el primer grupo de corazones que emana */
+.heart-emitters::before {
+    animation: emit-hearts 4s infinite ease-out 0s; /* Empieza al inicio del ciclo */
+}
+
+/* Animación para el segundo grupo, con un pequeño retraso */
+.heart-emitters::after {
+    animation: emit-hearts 4s infinite ease-out 2s; /* Empieza a la mitad del ciclo */
+}
+
+/* --- Definición de Animaciones --- */
+
+/* Animación para el latido y el difuminado del corazón principal */
+@keyframes pulse-diffused {
     0% {
-        /* Estado inicial: tamaño normal y brillo suave */
-        transform: rotate(-45deg) scale(1); 
-        box-shadow: 0 0 60px rgba(255, 0, 127, 0.9);
+        transform: scale(1); /* Tamaño normal */
+        box-shadow: 0 0 120px 30px rgba(255, 0, 127, 0.9); /* Brillo normal */
     }
     50% {
-        /* Estado intermedio (punto máximo del latido): crece y brilla más */
-        transform: rotate(-45deg) scale(1.2); /* Crece un 20% más grande */
-        box-shadow: 0 0 100px rgba(255, 0, 127, 1); /* Brillo más intenso */
+        transform: scale(1.15); /* Crece un 15% */
+        box-shadow: 0 0 150px 40px rgba(255, 0, 127, 1); /* Brillo más intenso */
     }
     100% {
-        /* Vuelve al estado inicial para completar el ciclo */
-        transform: rotate(-45deg) scale(1); 
-        box-shadow: 0 0 60px rgba(255, 0, 127, 0.9);
+        transform: scale(1); /* Vuelve al tamaño normal */
+        box-shadow: 0 0 120px 30px rgba(255, 0, 127, 0.9);
+    }
+}
+
+/* Animación para los pequeños corazones que emanan */
+@keyframes emit-hearts {
+    0% {
+        transform: translate(-50%, -50%) scale(0); /* Empieza pequeño desde el centro */
+        opacity: 0.7; /* Bastante visible al inicio */
+    }
+    30% { /* Momento en que el corazón principal está en su máximo tamaño */
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2.5); /* Crece y se aleja */
+        opacity: 0; /* Se desvanece por completo */
     }
 }
