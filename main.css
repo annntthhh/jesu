@@ -6,35 +6,35 @@ body {
     min-height: 100vh;
     margin: 0;
     
-    /* Fondo que complementa el aura rosa */
+    /* Fondo rosa pálido */
     background-color: #f7e0e7; 
     overflow: hidden;
 }
 
-/* --- El Corazón Inflable Rosado (El Aura Suave) --- */
+/* --- El Corazón Rosado Suave que se Infla --- */
 .inflating-heart {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 180px; 
+    height: 180px;
     
-    /* GRADIENTE: Para el color rosa suave, de claro a oscuro */
+    /* GRADIENTE para el color rosa suave, de claro a oscuro */
     background: radial-gradient(circle at center, 
-                #ff82b2 0%,    /* Rosa claro en el centro (luz) */
+                #ff82b2 0%,    /* Rosa claro (luz) */
                 #ff1493 50%,   /* Rosa vibrante */
-                #e0007b 100%   /* Rosa oscuro en los bordes */
+                #e0007b 100%   /* Rosa oscuro */
                 );
     
     /* Gira el elemento para formar la punta del corazón */
     transform: rotate(-45deg); 
     
-    /* Sombra ENORME y difuminada: Crea el efecto de halo suave y expandido */
-    box-shadow: 0 0 150px 60px rgba(255, 0, 127, 0.5); 
+    /* Sombra GRANDE y suave: Esto da el efecto de aura y volumen */
+    box-shadow: 0 0 50px 10px rgba(255, 0, 127, 0.5); 
     
-    /* FILTRO BLUR (Desenfoque muy ALTO): La clave para el efecto SUPER DIFUMINADO y SUAVE */
-    filter: blur(40px); 
+    /* FILTRO BLUR (Desenfoque muy bajo): Solo para suavizar los bordes, no para borrar la forma */
+    filter: blur(1px); 
     
     /* Aplica la animación de Inflado */
-    animation: inflate-pulse 3s infinite ease-in-out; 
+    animation: inflate-pulse 2.5s infinite ease-in-out; 
     
     transform-origin: center center;
     z-index: 10;
@@ -45,10 +45,10 @@ body {
 .inflating-heart::after {
     content: "";
     position: absolute;
-    width: 200px; 
-    height: 200px;
+    width: 180px; 
+    height: 180px;
     
-    /* Mismo gradiente para las partes superiores */
+    /* Mismo gradiente */
     background: radial-gradient(circle at center, 
                 #ff82b2 0%,
                 #ff1493 50%,
@@ -59,30 +59,29 @@ body {
 
 /* Posiciona el círculo superior izquierdo */
 .inflating-heart::before {
-    top: -100px; 
+    top: -90px; 
     left: 0;
 }
 
 /* Posiciona el círculo superior derecho */
 .inflating-heart::after {
     top: 0;
-    left: 100px; 
+    left: 90px; 
 }
 
 /* --- Definición de la Animación de Inflado y Expansión --- */
 @keyframes inflate-pulse {
     0% {
-        transform: rotate(-45deg) scale(0.95); /* Empieza ligeramente encogido */
-        filter: blur(30px);
+        transform: rotate(-45deg) scale(0.9); /* Empieza encogido */
+        box-shadow: 0 0 40px 8px rgba(255, 0, 127, 0.4);
     }
     50% {
-        /* Se infla visiblemente un 20% más: Esto da la sensación de EXPANDIRSE */
-        transform: rotate(-45deg) scale(1.15); 
-        filter: blur(50px); /* El desenfoque y el aura aumentan con la expansión */
-        box-shadow: 0 0 200px 90px rgba(255, 0, 127, 0.7); /* El brillo se dispara */
+        /* Se infla MUY visiblemente un 30% más: Esto da la sensación de EXPANSION */
+        transform: rotate(-45deg) scale(1.2); 
+        box-shadow: 0 0 80px 20px rgba(255, 0, 127, 0.8); /* El aura y el brillo se disparan */
     }
     100% {
-        transform: rotate(-45deg) scale(0.95); /* Vuelve al estado ligeramente encogido */
-        filter: blur(30px);
+        transform: rotate(-45deg) scale(0.9); /* Vuelve al estado encogido */
+        box-shadow: 0 0 40px 8px rgba(255, 0, 127, 0.4);
     }
 }
