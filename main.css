@@ -1,42 +1,44 @@
-/* --- Estilos Generales y Centrado --- */
+/* --- Estilos del Fondo (La Imagen Estática) --- */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    
-    /* El color de fondo rosa suave de tu imagen */
-    background-color: #f7e0e7; 
     overflow: hidden;
+
+    /* AHORA USAMOS LA IMAGEN COMO FONDO DE PÁGINA */
+    background-image: url('background-heart.png'); 
+    background-size: cover; /* Cubre toda la pantalla */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat;
 }
 
-/* --- El Corazón Creado con CSS (Replicando el de tu Imagen) --- */
+/* --- El Corazón Creado con CSS (El ÚNICO que Late) --- */
 .gradient-heart {
     position: relative;
-    width: 200px; /* Tamaño base del corazón */
-    height: 180px; /* Altura ajustada para la forma de tu imagen */
-    
-    /* GRADIENTE RADIAL: Clave para el efecto de luz central y difuminado de tu imagen */
+    width: 200px;
+    height: 180px;
+
+    /* GRADIENTE: Similar al color de la imagen para el corazón latiendo */
     background: radial-gradient(circle at center, 
-                #ff80ab 0%,    /* Rosa claro en el centro */
-                #ff1493 40%,   /* Rosa vibrante intermedio */
-                #e0007b 80%    /* Rosa oscuro en los bordes para profundidad */
+                #ff80ab 0%, 
+                #ff1493 40%,
+                #e0007b 80%
                 );
-    
-    /* Forma del Corazón con clip-path: Recrea la forma suave de tu imagen */
+
+    /* Forma del Corazón con clip-path: Recrea la forma suave */
     clip-path: path("M200 70 C 200 20, 150 0, 100 50 C 50 0, 0 20, 0 70 C 0 120, 100 180, 100 180 C 100 180, 200 120, 200 70 Z");
-    
-    /* FILTRO BLUR (Desenfoque): Esto es esencial para el efecto "desenfocado" de tu imagen */
-    filter: blur(25px); /* Ajustado para replicar el difuminado de tu imagen */
-    
-    /* Box-shadow difuminado: Crea el halo de luz alrededor del corazón, como en tu imagen */
+
+    /* FILTRO BLUR (Desenfoque) para que parezca difuminado */
+    filter: blur(20px); 
+
+    /* Box-shadow: el halo de luz */
     box-shadow: 0 0 100px 30px rgba(255, 0, 127, 0.8); 
-    
-    /* Aplica la animación de latido a este corazón de CSS */
+
+    /* Aplica la animación de latido SOLO a este elemento */
     animation: pulse-css 3s infinite ease-in-out; 
     
-    /* Ajuste de transformación para el latido */
     transform-origin: center center;
     z-index: 10;
 }
@@ -45,17 +47,17 @@ body {
 @keyframes pulse-css {
     0% {
         transform: scale(1); /* Tamaño normal */
-        filter: blur(20px); /* Un poco menos de desenfoque cuando está "descansando" */
+        filter: blur(15px); /* Un poco menos de desenfoque */
         box-shadow: 0 0 80px 20px rgba(255, 0, 127, 0.7); /* Menos brillo */
     }
     50% {
-        transform: scale(1.1); /* Crece un 10% más grande */
-        filter: blur(30px); /* Más desenfoque y brillo al latir */
+        transform: scale(1.15); /* Crece un 15% más: Latido muy visible */
+        filter: blur(25px); /* Más desenfoque y brillo al latir */
         box-shadow: 0 0 120px 40px rgba(255, 0, 127, 1); /* Brillo máximo */
     }
     100% {
         transform: scale(1); /* Vuelve al tamaño normal */
-        filter: blur(20px);
+        filter: blur(15px);
         box-shadow: 0 0 80px 20px rgba(255, 0, 127, 0.7);
     }
 }
