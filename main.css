@@ -1,38 +1,60 @@
-/* --- El Body Completo como la IMAGEN DE FONDO LATIENDO --- */
+/* --- Estilos Generales y Centrado --- */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
-    overflow: hidden; /* Importante para que el escalado no muestre barras */
-
-    /* Tu imagen de corazón difuminado como fondo */
-    background-image: url('background-heart.png'); 
-    background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
     
-    /* El body completo es el que se anima para LATIR */
-    animation: background-pulse 3s infinite ease-in-out; 
-    
-    /* Importante para que la animación de escala se vea bien */
-    transform-origin: center center; 
+    /* Fondo rosa pálido que se mezclará bien con el corazón difuminado */
+    background-color: #f7e0e7; 
+    overflow: hidden;
 }
 
-/* --- Definición de la Animación de Latido (para el Fondo/Imagen) --- */
-@keyframes background-pulse {
+/* --- El Corazón Gradiente, SUPER Difuminado --- */
+.super-diffused-heart {
+    position: relative;
+    width: 250px; /* Tamaño base del corazón (más grande para difuminar mejor) */
+    height: 220px; /* Altura ajustada para una forma suave */
+    
+    /* GRADIENTE RADIAL: Desde el centro hacia afuera, como en tu imagen */
+    background: radial-gradient(circle at center, 
+                #ff80ab 0%,    /* Rosa claro en el centro */
+                #ff1493 40%,   /* Rosa vibrante intermedio */
+                #e0007b 80%    /* Rosa oscuro en los bordes */
+                );
+    
+    /* Clip-path para una forma base de corazón suave */
+    clip-path: path("M250 85 C 250 25, 187.5 0, 125 62.5 C 62.5 0, 0 25, 0 85 C 0 150, 125 220, 125 220 C 125 220, 250 150, 250 85 Z");
+    
+    /* FILTRO BLUR (Desenfoque EXTREMO): Esto es la clave para la super difuminación */
+    filter: blur(50px); /* ¡Ajustado a un valor muy alto para una difuminación máxima! */
+    
+    /* Box-shadow ENORME y difuminado: Crea un halo de luz aún mayor */
+    box-shadow: 0 0 200px 80px rgba(255, 0, 127, 0.6); 
+    
+    /* Aplica la animación de latido a este corazón CSS */
+    animation: pulse-super-diffused 3.5s infinite ease-in-out; 
+    
+    transform-origin: center center;
+    z-index: 10;
+}
+
+/* --- Definición de la Animación de Latido (Visible en el Corazón Difuminado) --- */
+@keyframes pulse-super-diffused {
     0% {
-        transform: scale(1); /* Tamaño normal del fondo */
-        /* Opcional: puedes ajustar la opacidad si quieres un efecto de brillo */
-        opacity: 0.95; 
+        transform: scale(1); /* Tamaño normal */
+        filter: blur(40px); /* Un poco menos de desenfoque al "descansar" */
+        box-shadow: 0 0 180px 70px rgba(255, 0, 127, 0.5); /* Menos brillo */
     }
     50% {
-        transform: scale(1.05); /* El fondo crece un 5% (latido visible pero suave) */
-        opacity: 1; /* Opacidad completa en el punto álgido del latido */
+        transform: scale(1.1); /* Crece un 10% más grande para un latido visible */
+        filter: blur(60px); /* Más desenfoque y brillo al latir */
+        box-shadow: 0 0 250px 100px rgba(255, 0, 127, 0.8); /* Brillo máximo */
     }
     100% {
         transform: scale(1); /* Vuelve al tamaño normal */
-        opacity: 0.95;
+        filter: blur(40px);
+        box-shadow: 0 0 180px 70px rgba(255, 0, 127, 0.5);
     }
 }
