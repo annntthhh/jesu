@@ -11,81 +11,75 @@ body {
     overflow: hidden;
 }
 
-/* --- El Corazón Tipo Emoji Rosado --- */
-.emoji-pink-heart {
+/* --- El Corazón Tipo Emoji Rosado con Efecto 3D --- */
+.emoji-heart-final {
     position: relative;
-    width: 160px; /* Tamaño ligeramente más pequeño para un look más compacto de emoji */
-    height: 160px;
+    width: 150px; /* Tamaño del corazón */
+    height: 140px; /* Altura ajustada para una forma de emoji */
     
-    /* GRADIENTE: Para el efecto 3D y volumen del emoji, con un punto de luz sutil */
-    background: radial-gradient(circle at 25% 25%, 
-                #ff82b2 0%,      /* Rosa muy claro como punto de luz */
-                #ff1493 40%,     /* Rosa vibrante, color central del emoji */
-                #e70072 80%,     /* Rosa un poco más oscuro para volumen */
-                #c6005c 100%     /* Borde oscuro para el efecto 3D */
-                );
-    
-    /* Gira el elemento para formar la punta del corazón */
+    /* Gradiente para la forma principal y el efecto 3D */
+    background-image: 
+        radial-gradient(circle at 35% 35%, #ffc0d9 0%, #ff82b2 20%, #ff1493 50%, #e70072 80%), /* Efecto de luz superior */
+        linear-gradient(to bottom right, #cc0066 0%, #e70072 100%); /* Color base y sombra */
+
+    /* Forma del Corazón (usando rotate y pseudo-elementos) */
     transform: rotate(-45deg); 
     
-    /* Sombra para el efecto de "flotar" y volumen del emoji */
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25); 
+    /* Sombra para el efecto "flotante" y volumen del emoji */
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3); 
     
-    /* FILTRO BLUR (Desenfoque muy sutil): Solo para suavizar bordes un poco, no para borrar forma */
-    filter: blur(0.8px); /* ¡Valor muy bajo para un difuminado apenas perceptible! */
+    /* FILTRO BLUR (Desenfoque muy sutil): Solo para suavizar los bordes ligeramente */
+    filter: blur(0.7px); /* Valor muy bajo para una suavidad controlada */
     
     /* Aplica la animación de latido */
-    animation: emoji-heart-pulse 2s infinite ease-in-out; /* Animación más rápida para un latido de emoji */
+    animation: emoji-final-pulse 2s infinite ease-in-out; 
     
     transform-origin: center center;
     z-index: 10;
 }
 
 /* Pseudo-elementos para las dos partes redondeadas superiores del corazón */
-.emoji-pink-heart::before,
-.emoji-pink-heart::after {
+.emoji-heart-final::before,
+.emoji-heart-final::after {
     content: "";
     position: absolute;
-    width: 160px; /* Mismo tamaño que el cuerpo del corazón */
-    height: 160px;
+    width: 150px; 
+    height: 150px; /* Ligeramente más alto para que el círculo cubra bien */
     
-    /* Mismo gradiente para que las partes superiores coincidan en estilo */
-    background: radial-gradient(circle at 25% 25%, 
-                #ff82b2 0%,      
-                #ff1493 40%,     
-                #e70072 80%,     
-                #c6005c 100%     
-                );
+    /* Mismo gradiente para las partes superiores */
+    background-image: 
+        radial-gradient(circle at 35% 35%, #ffc0d9 0%, #ff82b2 20%, #ff1493 50%, #e70072 80%),
+        linear-gradient(to bottom right, #cc0066 0%, #e70072 100%);
     border-radius: 50%; /* Los convierte en círculos */
 }
 
 /* Posiciona el círculo superior izquierdo */
-.emoji-pink-heart::before {
-    top: -80px; /* La mitad de la altura hacia arriba */
+.emoji-heart-final::before {
+    top: -75px; 
     left: 0;
 }
 
 /* Posiciona el círculo superior derecho */
-.emoji-pink-heart::after {
+.emoji-heart-final::after {
     top: 0;
-    left: 80px; /* La mitad de la anchura hacia la derecha */
+    left: 75px; 
 }
 
-/* --- Definición de la Animación de Latido (Claro y Rápido como un Emoji) --- */
-@keyframes emoji-heart-pulse {
+/* --- Definición de la Animación de Latido (Clara y Visible) --- */
+@keyframes emoji-final-pulse {
     0% {
         transform: rotate(-45deg) scale(1); /* Tamaño normal */
-        filter: blur(0.8px); /* Desenfoque sutil */
-        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25); /* Sombra normal */
+        filter: blur(0.7px); /* Desenfoque sutil */
+        box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3); /* Sombra normal */
     }
     50% {
         transform: rotate(-45deg) scale(1.1); /* Crece un 10% (latido visible) */
-        filter: blur(1.5px); /* Un poco más suave al latir */
-        box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
+        filter: blur(1.2px); /* Un poco más suave al latir */
+        box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.45); /* Sombra más pronunciada */
     }
     100% {
         transform: rotate(-45deg) scale(1); /* Vuelve al tamaño normal */
-        filter: blur(0.8px);
-        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
+        filter: blur(0.7px);
+        box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
     }
 }
