@@ -6,57 +6,38 @@ body {
     min-height: 100vh;
     margin: 0;
     
-    /* El color de fondo rosa suave de tu imagen */
+    /* Color de fondo que coincide con la imagen original para un look sin bordes */
     background-color: #f7e0e7; 
     overflow: hidden;
 }
 
-/* --- El Corazón con Estilo de la Imagen Original --- */
-.heart-original {
-    position: relative;
-    width: 200px; /* Tamaño base del corazón */
-    height: 180px; /* Altura para una forma más similar a tu imagen */
+/* --- El Corazón Usando la Imagen ORIGINAL --- */
+.original-heart-image {
+    width: 350px; /* Tamaño del contenedor, puedes ajustarlo si quieres un corazón más grande */
+    height: 350px;
     
-    /* GRADIENTE: Desde un rosa más claro en el centro a uno más oscuro */
-    background: radial-gradient(circle at center, #ff80ab 0%, #ff1493 50%, #e0007b 100%);
+    /* Llama a la imagen difuminada que subiste */
+    background-image: url('heart-diffused.png'); 
+    background-size: contain; /* Asegura que la imagen se vea completa */
+    background-repeat: no-repeat;
+    background-position: center; 
     
-    /* Borde redondeado agresivo para una forma de corazón difuminada */
-    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    /* Aplica la animación de latido */
+    animation: pulse-image 2.5s infinite ease-in-out; /* Velocidad y suavidad de la animación */
     
-    /* USAMOS CLIP-PATH PARA LA FORMA DEFINITIVA DEL CORAZÓN */
-    /* Esta es una forma SVG adaptada para CSS para un corazón muy suave */
-    clip-path: path("M200 70 C 200 20, 150 0, 100 50 C 50 0, 0 20, 0 70 C 0 120, 100 180, 100 180 C 100 180, 200 120, 200 70 Z");
-    
-    /* FILTRO BLUR (Desenfoque) para la suavidad de la imagen original */
-    filter: blur(20px); 
-    
-    /* Una sombra muy grande y difuminada para el brillo que rodea el corazón */
-    box-shadow: 0 0 150px 50px rgba(255, 0, 127, 0.7); 
-    
-    /* Aplica la animación de latido diseñada para este estilo */
-    animation: pulse-original 3s infinite ease-in-out; 
-    
-    /* Asegurarse de que el corazón esté por encima de cualquier cosa */
-    z-index: 10;
+    /* Aseguramos que la transformación se haga desde el centro */
+    transform-origin: center center; 
 }
 
-/* --- Definición de la Animación de Latido (Ajustada a la Imagen Original) --- */
-@keyframes pulse-original {
+/* --- Definición de la Animación de Latido (Visible) --- */
+@keyframes pulse-image {
     0% {
-        transform: scale(1); /* Tamaño normal */
-        /* El blur y el brillo se reducen ligeramente en el estado "descansando" */
-        filter: blur(15px);
-        box-shadow: 0 0 120px 40px rgba(255, 0, 127, 0.6);
+        transform: scale(1); /* Tamaño base */
     }
     50% {
-        transform: scale(1.1); /* Crece un 10% más grande */
-        /* El blur y el brillo aumentan para el "latido" */
-        filter: blur(25px);
-        box-shadow: 0 0 180px 60px rgba(255, 0, 127, 0.9);
+        transform: scale(1.15); /* Crece un 15% más grande: esto hará que el latido sea MUY visible */
     }
     100% {
-        transform: scale(1); /* Vuelve al tamaño normal */
-        filter: blur(15px);
-        box-shadow: 0 0 120px 40px rgba(255, 0, 127, 0.6);
+        transform: scale(1); /* Vuelve al tamaño base */
     }
 }
