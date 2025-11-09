@@ -6,80 +6,83 @@ body {
     min-height: 100vh;
     margin: 0;
     
-    /* Fondo rosa pálido */
+    /* Fondo que complementa el aura rosa */
     background-color: #f7e0e7; 
     overflow: hidden;
 }
 
-/* --- El Corazón Tipo Emoji Rosado con Efecto 3D --- */
-.emoji-heart-final {
+/* --- El Corazón Inflable Rosado (El Aura Suave) --- */
+.inflating-heart {
     position: relative;
-    width: 150px; /* Tamaño del corazón */
-    height: 140px; /* Altura ajustada para una forma de emoji */
+    width: 200px;
+    height: 200px;
     
-    /* Gradiente para la forma principal y el efecto 3D */
-    background-image: 
-        radial-gradient(circle at 35% 35%, #ffc0d9 0%, #ff82b2 20%, #ff1493 50%, #e70072 80%), /* Efecto de luz superior */
-        linear-gradient(to bottom right, #cc0066 0%, #e70072 100%); /* Color base y sombra */
-
-    /* Forma del Corazón (usando rotate y pseudo-elementos) */
+    /* GRADIENTE: Para el color rosa suave, de claro a oscuro */
+    background: radial-gradient(circle at center, 
+                #ff82b2 0%,    /* Rosa claro en el centro (luz) */
+                #ff1493 50%,   /* Rosa vibrante */
+                #e0007b 100%   /* Rosa oscuro en los bordes */
+                );
+    
+    /* Gira el elemento para formar la punta del corazón */
     transform: rotate(-45deg); 
     
-    /* Sombra para el efecto "flotante" y volumen del emoji */
-    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3); 
+    /* Sombra ENORME y difuminada: Crea el efecto de halo suave y expandido */
+    box-shadow: 0 0 150px 60px rgba(255, 0, 127, 0.5); 
     
-    /* FILTRO BLUR (Desenfoque muy sutil): Solo para suavizar los bordes ligeramente */
-    filter: blur(0.7px); /* Valor muy bajo para una suavidad controlada */
+    /* FILTRO BLUR (Desenfoque muy ALTO): La clave para el efecto SUPER DIFUMINADO y SUAVE */
+    filter: blur(40px); 
     
-    /* Aplica la animación de latido */
-    animation: emoji-final-pulse 2s infinite ease-in-out; 
+    /* Aplica la animación de Inflado */
+    animation: inflate-pulse 3s infinite ease-in-out; 
     
     transform-origin: center center;
     z-index: 10;
 }
 
-/* Pseudo-elementos para las dos partes redondeadas superiores del corazón */
-.emoji-heart-final::before,
-.emoji-heart-final::after {
+/* Pseudo-elementos para las dos partes redondeadas superiores */
+.inflating-heart::before,
+.inflating-heart::after {
     content: "";
     position: absolute;
-    width: 150px; 
-    height: 150px; /* Ligeramente más alto para que el círculo cubra bien */
+    width: 200px; 
+    height: 200px;
     
     /* Mismo gradiente para las partes superiores */
-    background-image: 
-        radial-gradient(circle at 35% 35%, #ffc0d9 0%, #ff82b2 20%, #ff1493 50%, #e70072 80%),
-        linear-gradient(to bottom right, #cc0066 0%, #e70072 100%);
-    border-radius: 50%; /* Los convierte en círculos */
+    background: radial-gradient(circle at center, 
+                #ff82b2 0%,
+                #ff1493 50%,
+                #e0007b 100%
+                );
+    border-radius: 50%; /* Círculos */
 }
 
 /* Posiciona el círculo superior izquierdo */
-.emoji-heart-final::before {
-    top: -75px; 
+.inflating-heart::before {
+    top: -100px; 
     left: 0;
 }
 
 /* Posiciona el círculo superior derecho */
-.emoji-heart-final::after {
+.inflating-heart::after {
     top: 0;
-    left: 75px; 
+    left: 100px; 
 }
 
-/* --- Definición de la Animación de Latido (Clara y Visible) --- */
-@keyframes emoji-final-pulse {
+/* --- Definición de la Animación de Inflado y Expansión --- */
+@keyframes inflate-pulse {
     0% {
-        transform: rotate(-45deg) scale(1); /* Tamaño normal */
-        filter: blur(0.7px); /* Desenfoque sutil */
-        box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3); /* Sombra normal */
+        transform: rotate(-45deg) scale(0.95); /* Empieza ligeramente encogido */
+        filter: blur(30px);
     }
     50% {
-        transform: rotate(-45deg) scale(1.1); /* Crece un 10% (latido visible) */
-        filter: blur(1.2px); /* Un poco más suave al latir */
-        box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.45); /* Sombra más pronunciada */
+        /* Se infla visiblemente un 20% más: Esto da la sensación de EXPANDIRSE */
+        transform: rotate(-45deg) scale(1.15); 
+        filter: blur(50px); /* El desenfoque y el aura aumentan con la expansión */
+        box-shadow: 0 0 200px 90px rgba(255, 0, 127, 0.7); /* El brillo se dispara */
     }
     100% {
-        transform: rotate(-45deg) scale(1); /* Vuelve al tamaño normal */
-        filter: blur(0.7px);
-        box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+        transform: rotate(-45deg) scale(0.95); /* Vuelve al estado ligeramente encogido */
+        filter: blur(30px);
     }
 }
