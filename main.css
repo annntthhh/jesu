@@ -6,66 +6,57 @@ body {
     min-height: 100vh;
     margin: 0;
     
-    /* Color de fondo sutil y claro de tu imagen */
-    background-color: #f7e0e7; /* Rosa muy pálido, casi blanco */
+    /* El color de fondo rosa suave de tu imagen */
+    background-color: #f7e0e7; 
     overflow: hidden;
 }
 
-/* --- El Corazón Principal (Sólido y Nítido) --- */
-.heart {
+/* --- El Corazón con Estilo de la Imagen Original --- */
+.heart-original {
     position: relative;
-    width: 180px; /* Tamaño del corazón */
-    height: 180px;
+    width: 200px; /* Tamaño base del corazón */
+    height: 180px; /* Altura para una forma más similar a tu imagen */
     
-    /* Color magenta vibrante de tu imagen */
-    background-color: #ff007f; 
+    /* GRADIENTE: Desde un rosa más claro en el centro a uno más oscuro */
+    background: radial-gradient(circle at center, #ff80ab 0%, #ff1493 50%, #e0007b 100%);
     
-    /* Gira el elemento para formar la punta del corazón */
-    transform: rotate(-45deg); 
+    /* Borde redondeado agresivo para una forma de corazón difuminada */
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
     
-    /* Sombra sutil y difuminada hacia abajo y a la derecha, como en tu imagen */
-    box-shadow: 10px 10px 30px rgba(255, 0, 127, 0.4); 
+    /* USAMOS CLIP-PATH PARA LA FORMA DEFINITIVA DEL CORAZÓN */
+    /* Esta es una forma SVG adaptada para CSS para un corazón muy suave */
+    clip-path: path("M200 70 C 200 20, 150 0, 100 50 C 50 0, 0 20, 0 70 C 0 120, 100 180, 100 180 C 100 180, 200 120, 200 70 Z");
     
-    /* Aplica la animación de latido */
-    animation: simple-pulse 2.5s infinite ease-in-out; 
+    /* FILTRO BLUR (Desenfoque) para la suavidad de la imagen original */
+    filter: blur(20px); 
+    
+    /* Una sombra muy grande y difuminada para el brillo que rodea el corazón */
+    box-shadow: 0 0 150px 50px rgba(255, 0, 127, 0.7); 
+    
+    /* Aplica la animación de latido diseñada para este estilo */
+    animation: pulse-original 3s infinite ease-in-out; 
+    
+    /* Asegurarse de que el corazón esté por encima de cualquier cosa */
+    z-index: 10;
 }
 
-/* Pseudo-elementos para las dos partes redondeadas superiores del corazón */
-.heart::before,
-.heart::after {
-    content: "";
-    position: absolute;
-    width: 180px; 
-    height: 180px;
-    background-color: #ff007f; /* Mismo color magenta */
-    border-radius: 50%; /* Los convierte en círculos */
-}
-
-/* Posiciona el círculo superior izquierdo */
-.heart::before {
-    top: -90px; /* La mitad de la altura hacia arriba */
-    left: 0;
-}
-
-/* Posiciona el círculo superior derecho */
-.heart::after {
-    top: 0;
-    left: 90px; /* La mitad de la anchura hacia la derecha */
-}
-
-/* --- Definición de Animación de Latido --- */
-@keyframes simple-pulse {
+/* --- Definición de la Animación de Latido (Ajustada a la Imagen Original) --- */
+@keyframes pulse-original {
     0% {
-        transform: rotate(-45deg) scale(1); /* Tamaño normal */
-        box-shadow: 10px 10px 30px rgba(255, 0, 127, 0.4); /* Sombra normal */
+        transform: scale(1); /* Tamaño normal */
+        /* El blur y el brillo se reducen ligeramente en el estado "descansando" */
+        filter: blur(15px);
+        box-shadow: 0 0 120px 40px rgba(255, 0, 127, 0.6);
     }
     50% {
-        transform: rotate(-45deg) scale(1.1); /* Crece un 10% más grande */
-        /* La sombra se expande y se hace un poco más fuerte con el latido */
-        box-shadow: 15px 15px 40px rgba(255, 0, 127, 0.6); 
+        transform: scale(1.1); /* Crece un 10% más grande */
+        /* El blur y el brillo aumentan para el "latido" */
+        filter: blur(25px);
+        box-shadow: 0 0 180px 60px rgba(255, 0, 127, 0.9);
     }
     100% {
-        transform: rotate(-45deg) scale(1); /* Vuelve al tamaño normal */
-        box-shadow: 10px 10px 30px rgba(255, 0, 127, 0.4); /* Sombra normal */
+        transform: scale(1); /* Vuelve al tamaño normal */
+        filter: blur(15px);
+        box-shadow: 0 0 120px 40px rgba(255, 0, 127, 0.6);
     }
 }
