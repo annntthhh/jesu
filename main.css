@@ -1,0 +1,73 @@
+/* Estilos generales para centrar el corazón en la pantalla */
+body {
+    display: flex; /* Usa flexbox para alinear el contenido */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    min-height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+    margin: 0; /* Elimina márgenes por defecto */
+    
+    /* Fondo con el color suave de tu imagen */
+    background-color: #fce4ec; /* Rosa muy pálido */
+    overflow: hidden; /* Evita barras de desplazamiento */
+}
+
+/* Estilos para el corazón */
+.heart {
+    position: relative; /* Necesario para posicionar ::before y ::after */
+    width: 200px; /* Tamaño base del corazón */
+    height: 200px;
+    
+    /* Color principal del corazón, un rosa vibrante como en tu imagen */
+    background-color: #ff007f; 
+    
+    /* Gira el elemento para formar la punta del corazón */
+    transform: rotate(-45deg); 
+    
+    /* Brillo inicial, similar al desenfoque de tu imagen */
+    box-shadow: 0 0 60px rgba(255, 0, 127, 0.9); 
+    
+    /* Aplica la animación definida más abajo */
+    animation: pulse-grow 4s infinite ease-in-out; 
+}
+
+/* Pseudo-elementos para las dos partes redondeadas superiores del corazón */
+.heart::before,
+.heart::after {
+    content: ""; /* Obligatorio para pseudo-elementos */
+    position: absolute; /* Permite posicionarlos libremente */
+    width: 200px; /* Mismo tamaño que el .heart */
+    height: 200px;
+    background-color: #ff007f; /* Mismo color */
+    border-radius: 50%; /* Los convierte en círculos */
+}
+
+/* Posiciona el círculo superior izquierdo */
+.heart::before {
+    top: -100px; /* La mitad de la altura hacia arriba */
+    left: 0;
+}
+
+/* Posiciona el círculo superior derecho */
+.heart::after {
+    top: 0;
+    left: 100px; /* La mitad de la anchura hacia la derecha */
+}
+
+/* Definición de la animación de latido y crecimiento lento */
+@keyframes pulse-grow {
+    0% {
+        /* Estado inicial: tamaño normal y brillo suave */
+        transform: rotate(-45deg) scale(1); 
+        box-shadow: 0 0 60px rgba(255, 0, 127, 0.9);
+    }
+    50% {
+        /* Estado intermedio (punto máximo del latido): crece y brilla más */
+        transform: rotate(-45deg) scale(1.2); /* Crece un 20% más grande */
+        box-shadow: 0 0 100px rgba(255, 0, 127, 1); /* Brillo más intenso */
+    }
+    100% {
+        /* Vuelve al estado inicial para completar el ciclo */
+        transform: rotate(-45deg) scale(1); 
+        box-shadow: 0 0 60px rgba(255, 0, 127, 0.9);
+    }
+}
