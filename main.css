@@ -1,4 +1,4 @@
-/* --- Estilos Generales y Centrado --- */
+/* --- Estilos Generales y Fondo con Brillitos --- */
 body {
     display: flex;
     justify-content: center;
@@ -9,79 +9,113 @@ body {
     /* Fondo rosa pálido */
     background-color: #f7e0e7; 
     overflow: hidden;
+    
+    /* Brillitos de fondo (usando pseudo-elemento y animación) */
+    position: relative; /* Necesario para posicionar los brillitos */
 }
 
-/* --- El Corazón Rosado Suave que se Infla --- */
-.inflating-heart {
+/* Pseudo-elemento para los brillitos de fondo */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Gradiente con puntos blancos para simular brillos */
+    background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.4) 1px, transparent 1%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.4) 1px, transparent 1%),
+                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3) 1px, transparent 1%);
+    background-size: 20px 20px; /* Tamaño de la cuadrícula de brillos */
+    
+    animation: sparkle-fade 10s infinite alternate; /* Animación de aparición/desaparición */
+    pointer-events: none; /* Para que no bloquee interacciones */
+    z-index: 0; /* Asegura que estén detrás del corazón */
+}
+
+/* Animación para los brillitos de fondo */
+@keyframes sparkle-fade {
+    0% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 0.5; transform: scale(1); }
+}
+
+
+/* --- El Corazón Latiendo (Más Bonito) --- */
+.fancy-heart {
     position: relative;
     width: 180px; 
     height: 180px;
     
-    /* GRADIENTE para el color rosa suave, de claro a oscuro */
-    background: radial-gradient(circle at center, 
-                #ff82b2 0%,    /* Rosa claro (luz) */
-                #ff1493 50%,   /* Rosa vibrante */
-                #e0007b 100%   /* Rosa oscuro */
+    /* GRADIENTE: Más sofisticado para un look más "bonito" */
+    background: linear-gradient(135deg, 
+                #ff6ec7 0%,     /* Rosa más claro */
+                #ff1493 50%,    /* Rosa vibrante */
+                #cc0066 100%    /* Rosa oscuro y profundo */
                 );
+    
+    /* Bordes redondeados sutiles para una forma más suave */
+    border-radius: 20px 20px 0 20px; /* Esto le da una forma ligeramente diferente y más suave */
     
     /* Gira el elemento para formar la punta del corazón */
     transform: rotate(-45deg); 
     
-    /* Sombra GRANDE y suave: Esto da el efecto de aura y volumen */
-    box-shadow: 0 0 50px 10px rgba(255, 0, 127, 0.5); 
+    /* Sombra más suave y extendida para un aura elegante */
+    box-shadow: 0 0 40px 10px rgba(255, 0, 127, 0.4), /* Sombra principal */
+                inset 0 0 15px rgba(255, 255, 255, 0.3); /* Brillo interno sutil */
     
-    /* FILTRO BLUR (Desenfoque muy bajo): Solo para suavizar los bordes, no para borrar la forma */
-    filter: blur(1px); 
+    /* FILTRO BLUR (Desenfoque muy sutil): Para suavizar bordes */
+    filter: blur(0.8px); 
     
-    /* Aplica la animación de Inflado */
-    animation: inflate-pulse 2.5s infinite ease-in-out; 
+    /* Aplica la animación de latido */
+    animation: fancy-heart-pulse 2.5s infinite ease-in-out; 
     
     transform-origin: center center;
-    z-index: 10;
+    z-index: 10; /* Asegura que el corazón esté sobre los brillitos */
 }
 
 /* Pseudo-elementos para las dos partes redondeadas superiores */
-.inflating-heart::before,
-.inflating-heart::after {
+.fancy-heart::before,
+.fancy-heart::after {
     content: "";
     position: absolute;
     width: 180px; 
     height: 180px;
     
     /* Mismo gradiente */
-    background: radial-gradient(circle at center, 
-                #ff82b2 0%,
+    background: linear-gradient(135deg, 
+                #ff6ec7 0%,
                 #ff1493 50%,
-                #e0007b 100%
+                #cc0066 100%
                 );
     border-radius: 50%; /* Círculos */
 }
 
 /* Posiciona el círculo superior izquierdo */
-.inflating-heart::before {
+.fancy-heart::before {
     top: -90px; 
     left: 0;
 }
 
 /* Posiciona el círculo superior derecho */
-.inflating-heart::after {
+.fancy-heart::after {
     top: 0;
     left: 90px; 
 }
 
-/* --- Definición de la Animación de Inflado y Expansión --- */
-@keyframes inflate-pulse {
+/* --- Definición de la Animación de Latido (Claro y Elegante) --- */
+@keyframes fancy-heart-pulse {
     0% {
         transform: rotate(-45deg) scale(0.9); /* Empieza encogido */
-        box-shadow: 0 0 40px 8px rgba(255, 0, 127, 0.4);
+        box-shadow: 0 0 40px 10px rgba(255, 0, 127, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.3);
     }
     50% {
-        /* Se infla MUY visiblemente un 30% más: Esto da la sensación de EXPANSION */
-        transform: rotate(-45deg) scale(1.2); 
-        box-shadow: 0 0 80px 20px rgba(255, 0, 127, 0.8); /* El aura y el brillo se disparan */
+        transform: rotate(-45deg) scale(1.15); /* Se expande visiblemente */
+        box-shadow: 0 0 60px 15px rgba(255, 0, 127, 0.6), inset 0 0 25px rgba(255, 255, 255, 0.5); /* Sombra y brillo aumentan */
     }
     100% {
-        transform: rotate(-45deg) scale(0.9); /* Vuelve al estado encogido */
-        box-shadow: 0 0 40px 8px rgba(255, 0, 127, 0.4);
+        transform: rotate(-45deg) scale(0.9); /* Vuelve a encogerse */
+        box-shadow: 0 0 40px 10px rgba(255, 0, 127, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.3);
     }
 }
