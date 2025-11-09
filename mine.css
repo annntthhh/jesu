@@ -1,0 +1,81 @@
+/* Estilos generales del cuerpo */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    /* Usamos un color de fondo suave, como el de tu imagen */
+    background-color: #f7e0e7; /* Rosa muy pálido */
+    overflow: hidden; /* Para que no aparezcan barras de desplazamiento */
+    font-family: sans-serif;
+}
+
+/* Contenedor para centrar el corazón y el mensaje */
+.heart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* La forma del corazón (usando el truco del ::before y ::after) */
+.heart {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-color: #ff007f; /* Un rosa vibrante, como el centro de tu imagen */
+    transform: rotate(-45deg);
+    box-shadow: 0 0 40px rgba(255, 0, 127, 0.7); /* Para el efecto de desenfoque/brillo */
+    
+    /* Inicia la animación del latido/crecimiento */
+    animation: pulse-grow 4s infinite ease-in-out; 
+}
+
+/* Círculos superiores del corazón */
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-color: #ff007f;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -75px;
+    left: 0;
+}
+
+.heart::after {
+    top: 0;
+    left: 75px;
+}
+
+/* El mensaje debajo del corazón */
+.message {
+    margin-top: 50px; /* Separación del corazón */
+    font-size: 1.5em;
+    color: #ff007f;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* 🌟 Definición de la Animación 🌟 */
+@keyframes pulse-grow {
+    0% {
+        /* Tamaño inicial y brillo (latido) */
+        transform: rotate(-45deg) scale(1);
+        box-shadow: 0 0 40px rgba(255, 0, 127, 0.7);
+    }
+    50% {
+        /* Latido máximo - Crece 10% más grande */
+        transform: rotate(-45deg) scale(1.1);
+        box-shadow: 0 0 60px rgba(255, 0, 127, 1);
+    }
+    100% {
+        /* Vuelve a su tamaño inicial, completando el ciclo */
+        transform: rotate(-45deg) scale(1);
+        box-shadow: 0 0 40px rgba(255, 0, 127, 0.7);
+    }
+}
