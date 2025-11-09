@@ -1,81 +1,84 @@
-/* Estilos generales del cuerpo */
+/* Estilos generales para el cuerpo de la página */
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    /* Usamos un color de fondo suave, como el de tu imagen */
-    background-color: #f7e0e7; /* Rosa muy pálido */
-    overflow: hidden; /* Para que no aparezcan barras de desplazamiento */
-    font-family: sans-serif;
+    display: flex; /* Usa flexbox para centrar el contenido */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    min-height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+    margin: 0; /* Elimina márgenes predeterminados */
+    background-color: #fce4ec; /* Un rosa muy pálido, inspirado en tu imagen */
+    overflow: hidden; /* Evita barras de desplazamiento si algo se sale */
+    font-family: 'Pacifico', cursive; /* Usa la fuente de Google Fonts si la añadiste */
+    color: #e91e63; /* Color de texto rosa intenso */
 }
 
-/* Contenedor para centrar el corazón y el mensaje */
+/* Contenedor del corazón y el mensaje */
 .heart-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* Coloca el corazón y el mensaje en columna */
+    align-items: center; /* Centra los elementos de la columna */
+    padding: 20px;
+    /* Efecto de desenfoque suave para el contenedor, similar a tu imagen */
+    background: rgba(255, 255, 255, 0.3); /* Un poco de transparencia */
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(233, 30, 99, 0.37); /* Sombra que simula el brillo */
+    backdrop-filter: blur(8px); /* Efecto de desenfoque detrás del contenedor */
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-/* La forma del corazón (usando el truco del ::before y ::after) */
+/* Estilos para el corazón */
 .heart {
     position: relative;
-    width: 150px;
-    height: 150px;
-    background-color: #ff007f; /* Un rosa vibrante, como el centro de tu imagen */
-    transform: rotate(-45deg);
-    box-shadow: 0 0 40px rgba(255, 0, 127, 0.7); /* Para el efecto de desenfoque/brillo */
-    
-    /* Inicia la animación del latido/crecimiento */
-    animation: pulse-grow 4s infinite ease-in-out; 
+    width: 180px; /* Tamaño del corazón */
+    height: 180px;
+    background-color: #e91e63; /* Color rosa intenso para el corazón */
+    transform: rotate(-45deg); /* Gira para formar la punta del corazón */
+    box-shadow: 0 0 50px rgba(233, 30, 99, 0.8); /* Brillo inicial del corazón */
+    animation: pulse-grow 4s infinite ease-in-out; /* Aplica la animación */
+    z-index: 10; /* Asegura que esté por encima de otros elementos */
 }
 
-/* Círculos superiores del corazón */
+/* Pseudo-elementos para las partes redondeadas del corazón */
 .heart::before,
 .heart::after {
     content: "";
     position: absolute;
-    width: 150px;
-    height: 150px;
-    background-color: #ff007f;
-    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    background-color: #e91e63;
+    border-radius: 50%; /* Hace que sean círculos */
 }
 
 .heart::before {
-    top: -75px;
+    top: -90px; /* Posiciona el círculo superior izquierdo */
     left: 0;
 }
 
 .heart::after {
     top: 0;
-    left: 75px;
+    left: 90px; /* Posiciona el círculo superior derecho */
 }
 
-/* El mensaje debajo del corazón */
+/* Estilos para el mensaje */
 .message {
-    margin-top: 50px; /* Separación del corazón */
-    font-size: 1.5em;
-    color: #ff007f;
-    font-weight: bold;
+    margin-top: 40px; /* Espacio entre el corazón y el mensaje */
+    font-size: 2.2em; /* Tamaño grande para el mensaje */
     text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* Sombra para que resalte el texto */
 }
 
-/* 🌟 Definición de la Animación 🌟 */
+/* Animación para el latido y crecimiento lento */
 @keyframes pulse-grow {
     0% {
-        /* Tamaño inicial y brillo (latido) */
-        transform: rotate(-45deg) scale(1);
-        box-shadow: 0 0 40px rgba(255, 0, 127, 0.7);
+        transform: rotate(-45deg) scale(1); /* Tamaño normal */
+        box-shadow: 0 0 50px rgba(233, 30, 99, 0.8); /* Brillo normal */
     }
     50% {
-        /* Latido máximo - Crece 10% más grande */
-        transform: rotate(-45deg) scale(1.1);
-        box-shadow: 0 0 60px rgba(255, 0, 127, 1);
+        transform: rotate(-45deg) scale(1.15); /* Crece un 15% */
+        box-shadow: 0 0 80px rgba(233, 30, 99, 1); /* Brillo más intenso */
     }
     100% {
-        /* Vuelve a su tamaño inicial, completando el ciclo */
-        transform: rotate(-45deg) scale(1);
-        box-shadow: 0 0 40px rgba(255, 0, 127, 0.7);
+        transform: rotate(-45deg) scale(1); /* Vuelve al tamaño normal */
+        box-shadow: 0 0 50px rgba(233, 30, 99, 0.8); /* Vuelve al brillo normal */
     }
 }
