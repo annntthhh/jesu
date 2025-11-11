@@ -1,121 +1,92 @@
-/* --- Estilos Generales y Fondo con Brillitos --- */
+/* Estilos generales del cuerpo */
 body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffb6c1; /* Fondo Rosa claro y brillante */
+    color: #4a148c; /* Morado oscuro para el texto principal */
+    text-align: center;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     min-height: 100vh;
     margin: 0;
-    
-    /* Fondo rosa pálido */
-    background-color: #f7e0e7; 
-    overflow: hidden;
-    
-    /* Brillitos de fondo (usando pseudo-elemento y animación) */
-    position: relative; /* Necesario para posicionar los brillitos */
+    overflow: hidden; 
+    position: relative; 
 }
 
-/* Pseudo-elemento para los brillitos de fondo */
-body::before {
-    content: '';
+/* Contenedor de los corazones de fondo */
+.heart-background {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    
-    /* Gradiente con puntos blancos para simular brillos */
-    background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.4) 1px, transparent 1%),
-                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.4) 1px, transparent 1%),
-                radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3) 1px, transparent 1%);
-    background-size: 20px 20px; /* Tamaño de la cuadrícula de brillos */
-    
-    animation: sparkle-fade 10s infinite alternate; /* Animación de aparición/desaparición */
-    pointer-events: none; /* Para que no bloquee interacciones */
-    z-index: 0; /* Asegura que estén detrás del corazón */
-}
-
-/* Animación para los brillitos de fondo */
-@keyframes sparkle-fade {
-    0% { opacity: 0.5; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.05); }
-    100% { opacity: 0.5; transform: scale(1); }
-}
-
-
-/* --- El Corazón Latiendo (Más Bonito) --- */
-.fancy-heart {
-    position: relative;
-    width: 180px; 
-    height: 180px;
-    
-    /* GRADIENTE: Más sofisticado para un look más "bonito" */
-    background: linear-gradient(135deg, 
-                #ff6ec7 0%,     /* Rosa más claro */
-                #ff1493 50%,    /* Rosa vibrante */
-                #cc0066 100%    /* Rosa oscuro y profundo */
-                );
-    
-    /* Bordes redondeados sutiles para una forma más suave */
-    border-radius: 20px 20px 0 20px; /* Esto le da una forma ligeramente diferente y más suave */
-    
-    /* Gira el elemento para formar la punta del corazón */
-    transform: rotate(-45deg); 
-    
-    /* Sombra más suave y extendida para un aura elegante */
-    box-shadow: 0 0 40px 10px rgba(255, 0, 127, 0.4), /* Sombra principal */
-                inset 0 0 15px rgba(255, 255, 255, 0.3); /* Brillo interno sutil */
-    
-    /* FILTRO BLUR (Desenfoque muy sutil): Para suavizar bordes */
-    filter: blur(0.8px); 
-    
-    /* Aplica la animación de latido */
-    animation: fancy-heart-pulse 2.5s infinite ease-in-out; 
-    
-    transform-origin: center center;
-    z-index: 10; /* Asegura que el corazón esté sobre los brillitos */
-}
-
-/* Pseudo-elementos para las dos partes redondeadas superiores */
-.fancy-heart::before,
-.fancy-heart::after {
-    content: "";
-    position: absolute;
-    width: 180px; 
-    height: 180px;
-    
-    /* Mismo gradiente */
-    background: linear-gradient(135deg, 
-                #ff6ec7 0%,
-                #ff1493 50%,
-                #cc0066 100%
-                );
-    border-radius: 50%; /* Círculos */
-}
-
-/* Posiciona el círculo superior izquierdo */
-.fancy-heart::before {
-    top: -90px; 
-    left: 0;
-}
-
-/* Posiciona el círculo superior derecho */
-.fancy-heart::after {
     top: 0;
-    left: 90px; 
+    left: 0;
+    z-index: -1; /* Detrás del contenido */
+    pointer-events: none;
 }
 
-/* --- Definición de la Animación de Latido (Claro y Elegante) --- */
-@keyframes fancy-heart-pulse {
-    0% {
-        transform: rotate(-45deg) scale(0.9); /* Empieza encogido */
-        box-shadow: 0 0 40px 10px rgba(255, 0, 127, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.3);
-    }
-    50% {
-        transform: rotate(-45deg) scale(1.15); /* Se expande visiblemente */
-        box-shadow: 0 0 60px 15px rgba(255, 0, 127, 0.6), inset 0 0 25px rgba(255, 255, 255, 0.5); /* Sombra y brillo aumentan */
-    }
-    100% {
-        transform: rotate(-45deg) scale(0.9); /* Vuelve a encogerse */
-        box-shadow: 0 0 40px 10px rgba(255, 0, 127, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.3);
-    }
+/* Estilo individual de los corazones */
+.heart-background span {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.7); /* Corazones blancos brillantes, semi-transparentes */
+    font-size: 2em;
+    opacity: 0.8;
+}
+
+/* Posiciones estáticas de los corazones (añade más si deseas) */
+.heart-background span:nth-child(1) { top: 10%; left: 5%; transform: rotate(15deg); }
+.heart-background span:nth-child(2) { top: 20%; right: 10%; transform: rotate(-20deg); }
+.heart-background span:nth-child(3) { top: 35%; left: 25%; transform: rotate(5deg); }
+.heart-background span:nth-child(4) { top: 45%; right: 5%; transform: rotate(30deg); }
+.heart-background span:nth-child(5) { top: 60%; left: 15%; transform: rotate(-10deg); }
+.heart-background span:nth-child(6) { top: 70%; right: 20%; transform: rotate(25deg); }
+.heart-background span:nth-child(7) { top: 85%; left: 30%; transform: rotate(-15deg); }
+.heart-background span:nth-child(8) { top: 5%; left: 50%; transform: rotate(0deg); }
+.heart-background span:nth-child(9) { top: 90%; right: 40%; transform: rotate(10deg); }
+.heart-background span:nth-child(10) { top: 25%; left: 70%; transform: rotate(-5deg); }
+
+
+/* Contenedor principal del texto y el botón */
+.content-wrapper {
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 40px 60px;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+    z-index: 1; 
+}
+
+/* Estilo del encabezado */
+h1 {
+    color: #e91e63; /* Rosa fuerte */
+    font-size: 3em;
+    margin-bottom: 30px;
+}
+
+/* Estilo del botón "Te Amo" */
+#loveButton {
+    background-color: #ff1493; /* Rosa profundo */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#loveButton:hover {
+    background-color: #c2106e; 
+    transform: translateY(-2px);
+}
+
+/* Estilo del div donde aparecen los mensajes */
+#loveMessage {
+    margin-top: 40px;
+    font-size: 1.5em;
+    color: #d81b60; 
+    min-height: 50px; 
+    opacity: 0; /* Inicialmente oculto por el script */
+    transition: opacity 0.5s ease-in-out;
 }
