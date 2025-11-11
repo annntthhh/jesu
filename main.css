@@ -1,0 +1,33 @@
+/* ... (Todo el código anterior de main.css) ... */
+
+/* Estilo del contenedor principal */
+.content-wrapper {
+    /* ... (Estilos anteriores) ... */
+    background-color: rgba(255, 255, 255, 0.95); /* Más opaco */
+    box-shadow: 0 10px 20px rgba(255, 51, 153, 0.5); /* Sombra rosa brillante */
+    /* Añadimos un pequeño movimiento de flotación */
+    animation: float 5s ease-in-out infinite; 
+}
+
+/* Estilo del div donde aparecen los mensajes */
+#loveMessage {
+    /* ... (Estilos anteriores) ... */
+    font-weight: bold; /* Hace el texto más impactante */
+    color: #880e4f; /* Color más profundo para la lectura */
+    border-right: 3px solid #ff1493; /* Cursor de máquina de escribir */
+    white-space: nowrap; /* Mantiene el texto en una línea */
+    overflow: hidden; /* Esconde el texto hasta que se 'escribe' */
+}
+
+/* Animación para que el contenedor principal "flote" */
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+/* Animación del cursor de la máquina de escribir */
+@keyframes blink-cursor {
+    from, to { border-color: transparent; }
+    50% { border-color: #ff1493; }
+}
