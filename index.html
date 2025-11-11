@@ -4,92 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para Mi Amor Especial</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #ffb6c1; /* Rosa claro vibrante */
-            color: #4a148c; /* Morado oscuro */
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow: hidden; /* Para que los corazones no se salgan del body si no queremos */
-            position: relative; /* Para posicionar los corazones */
-        }
-
-        .heart-background {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1; /* Para que esté detrás del contenido */
-            pointer-events: none; /* Para que no interfiera con los clics */
-        }
-
-        .heart-background span {
-            position: absolute;
-            color: rgba(255, 255, 255, 0.7); /* Corazones blancos brillantes, semi-transparentes */
-            font-size: 2em; /* Tamaño de los corazones */
-            opacity: 0.8;
-        }
-
-        /* Posiciones de los corazones (puedes añadir más si quieres) */
-        .heart-background span:nth-child(1) { top: 10%; left: 5%; transform: rotate(15deg); }
-        .heart-background span:nth-child(2) { top: 20%; right: 10%; transform: rotate(-20deg); }
-        .heart-background span:nth-child(3) { top: 35%; left: 25%; transform: rotate(5deg); }
-        .heart-background span:nth-child(4) { top: 45%; right: 5%; transform: rotate(30deg); }
-        .heart-background span:nth-child(5) { top: 60%; left: 15%; transform: rotate(-10deg); }
-        .heart-background span:nth-child(6) { top: 70%; right: 20%; transform: rotate(25deg); }
-        .heart-background span:nth-child(7) { top: 85%; left: 30%; transform: rotate(-15deg); }
-        .heart-background span:nth-child(8) { top: 5%; left: 50%; transform: rotate(0deg); }
-        .heart-background span:nth-child(9) { top: 90%; right: 40%; transform: rotate(10deg); }
-        .heart-background span:nth-child(10) { top: 25%; left: 70%; transform: rotate(-5deg); }
-
-        .content-wrapper {
-            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semi-transparente para el contenido */
-            padding: 40px 60px;
-            border-radius: 20px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            max-width: 80%;
-            z-index: 1; /* Para que esté por encima de los corazones */
-        }
-
-        h1 {
-            color: #e91e63; /* Rosa fuerte */
-            font-size: 3em;
-            margin-bottom: 30px;
-        }
-
-        #loveButton {
-            background-color: #ff1493; /* Rosa profundo para el botón */
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.5em;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        #loveButton:hover {
-            background-color: #c2106e; /* Un tono más oscuro al pasar el ratón */
-            transform: translateY(-2px);
-        }
-
-        #loveMessage {
-            margin-top: 40px;
-            font-size: 1.5em;
-            color: #d81b60; /* Un rosa oscuro para el mensaje */
-            min-height: 50px; /* Para mantener espacio aunque no haya texto */
-            opacity: 0; /* Inicialmente oculto */
-            transition: opacity 0.5s ease-in-out;
-        }
-    </style>
+    <link rel="stylesheet" href="main.css"> 
 </head>
 <body>
     <div class="heart-background">
@@ -108,8 +23,8 @@
         const loveButton = document.getElementById('loveButton');
         const loveMessage = document.getElementById('loveMessage');
 
-        // Esta es la parte que actualizaremos cuando me digas los textos.
-        // Por ahora, solo es un ejemplo simple.
+        // **************** PERSONALIZA ESTOS MENSAJES ****************
+        // Cuando me los pases, los reemplazaré aquí. Por ahora son ejemplos.
         let messageIndex = 0;
         const messages = [
             "Eres el sol que ilumina mis días.",
@@ -118,6 +33,7 @@
             "Gracias por ser mi persona favorita.",
             "Te amo más de lo que las palabras pueden expresar."
         ];
+        // *************************************************************
 
         loveButton.addEventListener('click', () => {
             loveMessage.style.opacity = 0; // Oculta el mensaje antes de cambiarlo
